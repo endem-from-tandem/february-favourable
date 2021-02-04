@@ -16,7 +16,7 @@ const App: React.FC = () => {
         style={{
           minHeight: '100vh',
           backgroundColor: '#262B30',
-          paddingTop: 48,
+          paddingTop: 58,
         }}
       >
         <Routes auth={true} />

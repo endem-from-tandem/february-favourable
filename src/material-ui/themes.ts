@@ -4,9 +4,11 @@ const defaultTheme = () =>
   createMuiTheme({
     palette: {
       primary: {
+        light: '#808080',
         main: '#262b30',
         dark: '#121517',
       },
+      type: 'dark',
       secondary: {
         main: '#d84315',
         light: '',
@@ -15,6 +17,7 @@ const defaultTheme = () =>
       background: {
         paper: '#202428',
       },
+      error: { main: '#e0391b' },
       text: {
         primary: '#ebebeb',
         secondary: '#808080',
