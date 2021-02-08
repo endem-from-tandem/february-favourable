@@ -25,8 +25,9 @@ const defaultTheme = () =>
     },
   })
 
-const darkColors = ['c6c3b5', '#343434', '262b30', '2f363c']
-const gradients = [
+//const darkColors = ['c6c3b5', '#343434', '262b30', '2f363c']
+/*const gradients = [
   'linear-gradient(56deg, rgba(168,67,26,0.8733426476059174) 0%, rgba(47,54,60,0.9265639361213235) 100%)',
-]
+]*/
+
 export default defaultTheme

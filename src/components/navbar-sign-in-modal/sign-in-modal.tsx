@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import Tooltip from '@material-ui/core/Tooltip'
+//import Tooltip from '@material-ui/core/Tooltip'
 
 import CloseIcon from '@material-ui/icons/Close'
 import Visibility from '@material-ui/icons/Visibility'

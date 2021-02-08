@@ -10,15 +10,17 @@ import IconButton from '@material-ui/core/IconButton'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 
-//Toolbar & Driver
+//import List from '@material-ui/core/List'
+//import ListItem from '@material-ui/core/ListItem'
+//import ListItemText from '@material-ui/core/ListItemText'
+
+//Toolbar & Drawer
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Avatar from '@material-ui/core/Avatar'
-import Drawer from '@material-ui/core/Drawer'
+
+//import Avatar from '@material-ui/core/Avatar'
+//import Drawer from '@material-ui/core/Drawer'
 
 import { Card, CardActions, CardContent } from '@material-ui/core'
 
@@ -57,7 +59,7 @@ const useStyles = makeStyles((theme) =>
 
 const Navbar: React.FC = () => {
   const classes = useStyles()
-  const navs = ['some', 'some_two', 'with_large_text']
+  //const navs = ['some', 'some_two', 'with_large_text']
   return (
     <>
       <AppBar className={classes.appBar} position='fixed' color='primary'>
