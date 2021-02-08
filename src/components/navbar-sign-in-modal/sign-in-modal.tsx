@@ -209,7 +209,11 @@ const SignInModal: React.FC<SignInModalType> = ({
                     aria-label='toggle password visibility'
                     onClick={handleShowPassword}
                   >
-                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                    {showPassword ? (
+                      <Visibility color='secondary' />
+                    ) : (
+                      <VisibilityOff />
+                    )}
                   </IconButton>
                 ),
               }}
@@ -232,7 +236,11 @@ const SignInModal: React.FC<SignInModalType> = ({
                       aria-label='toggle password visibility'
                       onClick={handleShowPasswordConfirm}
                     >
-                      {showPasswordConfirm ? <Visibility /> : <VisibilityOff />}
+                      {showPasswordConfirm ? (
+                        <Visibility color='secondary' />
+                      ) : (
+                        <VisibilityOff />
+                      )}
                     </IconButton>
                   ),
                 }}

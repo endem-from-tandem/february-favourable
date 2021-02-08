@@ -76,6 +76,7 @@ const Navbar: React.FC = () => {
               </Box>
             ) : null}
             <IconButton
+              style={{ height: '25px', width: '50px' }}
               component={Link}
               to='/'
               className={classes.menuButton}
@@ -83,7 +84,7 @@ const Navbar: React.FC = () => {
               color='inherit'
               aria-label='logo'
             >
-              <img alt='logo' src={Logo} width='35px' height='35px' />
+              <img alt='logo' src={Logo} width='50px' height='25px' />
             </IconButton>
             <Box className={classes.flexBox} />
             <SignInModal />
