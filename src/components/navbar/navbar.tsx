@@ -61,77 +61,37 @@ const Navbar: React.FC = () => {
   const classes = useStyles()
   //const navs = ['some', 'some_two', 'with_large_text']
   return (
-    <>
-      <AppBar className={classes.appBar} position='fixed' color='primary'>
-        <Container disableGutters maxWidth='md'>
-          <Toolbar className={classes.toolBar}>
-            {false ? (
-              <Box display={{ xs: 'block', md: 'none' }}>
-                <IconButton
-                  className={classes.menuButton}
-                  edge='start'
-                  color='inherit'
-                  aria-label='app'
-                >
-                  <Menu />
-                </IconButton>
-              </Box>
-            ) : null}
-            <IconButton
-              style={{ height: '25px', width: '50px' }}
-              component={Link}
-              to='/'
-              className={classes.menuButton}
-              edge='start'
-              color='inherit'
-              aria-label='logo'
-            >
-              <img alt='logo' src={Logo} width='50px' height='25px' />
-            </IconButton>
-            <Box className={classes.flexBox} />
-            <SignInModal />
-          </Toolbar>
-        </Container>
-      </AppBar>
-
-      <div style={{ display: 'none' }}>
-        <Typography style={{ marginTop: 10 }} variant='h3' color='textPrimary'>
-          TextPrimary
-        </Typography>
-        <Typography variant='h3' color='textSecondary'>
-          TextSecondary
-        </Typography>
-        <Card
-          style={{
-            width: '340px',
-            margin: '0 auto',
-          }}
-        >
-          <CardContent>
-            <Typography color='textSecondary' gutterBottom>
-              Word of the Day
-            </Typography>
-            <Typography variant='h5' component='h2'>
-              Do it better will did faster
-            </Typography>
-            <Typography color='textSecondary'>adjective</Typography>
-            <Typography variant='body2' component='p'>
-              well meaning and kindly.
-              <br />
-              {'"a benevolent smile"'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button color='secondary' variant='outlined' size='small'>
-              Learn More
-            </Button>
-            <Button color='secondary' variant='contained' size='small'>
-              Learn More
-            </Button>
-          </CardActions>
-        </Card>
-      </div>
-    </>
+    <AppBar className={classes.appBar} position='fixed' color='primary'>
+      <Container disableGutters maxWidth='md'>
+        <Toolbar className={classes.toolBar}>
+          {false ? (
+            <Box display={{ xs: 'block', md: 'none' }}>
+              <IconButton
+                className={classes.menuButton}
+                edge='start'
+                color='inherit'
+                aria-label='app'
+              >
+                <Menu />
+              </IconButton>
+            </Box>
+          ) : null}
+          <IconButton
+            style={{ height: '25px', width: '50px' }}
+            component={Link}
+            to='/'
+            className={classes.menuButton}
+            edge='start'
+            color='inherit'
+            aria-label='logo'
+          >
+            <img alt='logo' src={Logo} width='50px' height='25px' />
+          </IconButton>
+          <Box className={classes.flexBox} />
+          <SignInModal />
+        </Toolbar>
+      </Container>
+    </AppBar>
   )
 }
 

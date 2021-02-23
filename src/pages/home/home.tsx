@@ -70,23 +70,6 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-
-      {/*}
-      <Box display='flex' flexDirection='row'>
-        <Box border={1} borderColor='secondary.main'>
-          <Typography variant='h2'>Well cum!</Typography>
-        </Box>
-
-        <Box
-          display={{ xs: 'none', md: 'block' }}
-          border={1}
-          borderColor='secondary.main'
-          p={10}
-        >
-          LOG
-        </Box>
-      </Box>
-  */}
     </Container>
   )
 }

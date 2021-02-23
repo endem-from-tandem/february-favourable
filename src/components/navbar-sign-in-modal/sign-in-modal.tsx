@@ -156,7 +156,7 @@ const SignInModal: React.FC<SignInModalType> = ({
           <ValidatorForm
             className={classes.dialogForm}
             ref={signInForm}
-            onError={(errors) => console.log(errors)}
+            onError={(e: any) => console.log(e)}
             onSubmit={handleSubmitted}
           >
             {type === 'up' ? (
@@ -227,8 +227,11 @@ const SignInModal: React.FC<SignInModalType> = ({
                 onChange={handleChange}
                 name='confirm'
                 value={formData.confirm}
-                validators={['required']}
-                errorMessages={['this field is required']}
+                validators={['required', 'isPasswordMatch']}
+                errorMessages={[
+                  'this field is required',
+                  'passwords not matches',
+                ]}
                 InputProps={{
                   endAdornment: (
                     <IconButton

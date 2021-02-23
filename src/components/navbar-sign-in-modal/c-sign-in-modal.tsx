@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { ValidatorForm } from 'react-material-ui-form-validator'
+import { VariantType, useSnackbar } from 'notistack'
+
 import SignInModal from './sign-in-modal'
 
+import { useHttp } from '../../utils/use-http'
+
 const SignInModalContainer: React.FC = () => {
+  const { enqueueSnackbar } = useSnackbar()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState<'in' | 'up' | null>(null)
+
   const handleOpen = (type: 'in' | 'up' | null) => {
     setOpen(true)
     setType(type)
@@ -17,7 +24,7 @@ const SignInModalContainer: React.FC = () => {
     password: '',
     confirm: '',
     name: '',
-    lastName: '',
+    lastname: '',
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
 
@@ -28,11 +35,24 @@ const SignInModalContainer: React.FC = () => {
   const handleChangeType = () => {
     setType(type === 'in' ? 'up' : 'in')
   }
-  const handleSubmitted = (event: React.FormEvent) => {
+
+  const { loading, error, request, clearError } = useHttp()
+  const handleRequest = async () => {}
+
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar(error, { variant: 'error' })
+      clearError()
+    }
+  }, [error])
+
+  const handleSubmitted = async (event: React.FormEvent) => {
     setFormSubmitted(true)
-    setTimeout(() => {
-      setFormSubmitted(false)
-    }, 1000)
+    try {
+      const response = await request(`/api/auth/sign-${type}`, 'POST', formData)
+      console.log(response)
+    } catch (e) {}
+    setFormSubmitted(false)
   }
 
   const [showPassword, setShowPassword] = useState<boolean>(false)
@@ -43,6 +63,15 @@ const SignInModalContainer: React.FC = () => {
   const handleShowPasswordConfirm = () => {
     setShowPasswordConfirm(!showPasswordConfirm)
   }
+
+  useEffect(() => {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value: string) => {
+      if (value !== formData.password) {
+        return false
+      }
+      return true
+    })
+  }, [formData])
   return (
     <SignInModal
       type={type}
