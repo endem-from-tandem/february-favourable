@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import Navbar from '../components/navbar'
 import Home from '../pages/home'
@@ -12,14 +12,17 @@ type RoutesType = {
 const Routes: React.FC<RoutesType> = ({ auth }) => {
   return (
     <>
-      <Navbar />
+      <Navbar auth={auth} />
       <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
+        {!auth ? (
+          <Route exact path='/'>
+            <Home />
+          </Route>
+        ) : null}
         <Route>
-          <PageNotFound />{' '}
+          <PageNotFound />
         </Route>
+        :
       </Switch>
     </>
   )

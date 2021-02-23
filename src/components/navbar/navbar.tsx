@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import SignInModal from '../navbar-sign-in-modal/'
+import NavbarAuthenticated from '../navbar-authenticated'
 
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
@@ -57,13 +58,18 @@ const useStyles = makeStyles((theme) =>
   })
 )
 
-const Navbar: React.FC = () => {
+type NavbarType = {
+  auth: boolean
+}
+
+const Navbar: React.FC<NavbarType> = ({ auth }) => {
   const classes = useStyles()
   //const navs = ['some', 'some_two', 'with_large_text']
   return (
     <AppBar className={classes.appBar} position='fixed' color='primary'>
       <Container disableGutters maxWidth='md'>
         <Toolbar className={classes.toolBar}>
+          {/* Toggle  */}
           {false ? (
             <Box display={{ xs: 'block', md: 'none' }}>
               <IconButton
@@ -76,6 +82,7 @@ const Navbar: React.FC = () => {
               </IconButton>
             </Box>
           ) : null}
+
           <IconButton
             style={{ height: '25px', width: '50px' }}
             component={Link}
@@ -88,7 +95,7 @@ const Navbar: React.FC = () => {
             <img alt='logo' src={Logo} width='50px' height='25px' />
           </IconButton>
           <Box className={classes.flexBox} />
-          <SignInModal />
+          {auth ? <NavbarAuthenticated /> : <SignInModal />}
         </Toolbar>
       </Container>
     </AppBar>

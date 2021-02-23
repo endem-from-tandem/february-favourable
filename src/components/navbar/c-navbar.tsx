@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './navbar'
 
-const NavbarContainer = () => {
-  return <Navbar />
+const NavbarContainer = ({ auth }: any) => {
+  return <Navbar auth={auth} />
 }
 export default NavbarContainer

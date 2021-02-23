@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { ValidatorForm } from 'react-material-ui-form-validator'
 import { VariantType, useSnackbar } from 'notistack'
 
 import SignInModal from './sign-in-modal'
-
+import { AuthContext } from '../../context/auth-context'
 import { useHttp } from '../../utils/use-http'
 
 const SignInModalContainer: React.FC = () => {
+  const auth = useContext(AuthContext)
   const { enqueueSnackbar } = useSnackbar()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState<'in' | 'up' | null>(null)
@@ -36,8 +37,7 @@ const SignInModalContainer: React.FC = () => {
     setType(type === 'in' ? 'up' : 'in')
   }
 
-  const { loading, error, request, clearError } = useHttp()
-  const handleRequest = async () => {}
+  const { error, request, clearError } = useHttp()
 
   useEffect(() => {
     if (error) {
@@ -51,6 +51,14 @@ const SignInModalContainer: React.FC = () => {
     try {
       const response = await request(`/api/auth/sign-${type}`, 'POST', formData)
       console.log(response)
+      if (response.message === 'Пользователь создан') {
+        enqueueSnackbar(response.message, { variant: 'success' })
+        setType('in')
+      }
+      if (response.token) {
+        setOpen(false)
+        auth.login(response.token, response.userId)
+      }
     } catch (e) {}
     setFormSubmitted(false)
   }
