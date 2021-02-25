@@ -6,10 +6,14 @@ import Home from '../pages/home'
 import PageNotFound from '../material-ui/404'
 
 type RoutesType = {
-  auth: boolean
+  auth: any
 }
 
 const Routes: React.FC<RoutesType> = ({ auth }) => {
+  console.log(auth)
+  if (auth === 'prefer') {
+    return null
+  }
   return (
     <>
       <Navbar auth={auth} />

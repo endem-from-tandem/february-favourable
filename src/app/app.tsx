@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './app.css'
 
 import Routes from '../routes/'
@@ -29,7 +29,12 @@ const useStyles = makeStyles((theme) =>
 const App: React.FC = () => {
   const { token, login, logout, userId } = useAuth()
   const classes = useStyles()
+  const [auth, setAuth] = useState<any>('prefer')
   const isAuthenticated = !!token
+
+  useEffect(() => {
+    setAuth(isAuthenticated)
+  }, [isAuthenticated])
   return (
     <AuthContext.Provider
       value={{ token, login, logout, userId, isAuthenticated }}
@@ -51,7 +56,7 @@ const App: React.FC = () => {
               paddingTop: 58,
             }}
           >
-            <Routes auth={isAuthenticated} />
+            <Routes auth={auth} />
           </Paper>
         </SnackbarProvider>
       </ThemeProvider>

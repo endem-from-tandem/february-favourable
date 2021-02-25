@@ -1,7 +1,13 @@
 import React from 'react'
 
+import Menu from './menu'
+
 const NavbarAuthenticated = () => {
-  return <div>Profile section</div>
+  return (
+    <>
+      <Menu />
+    </>
+  )
 }
 
 export default NavbarAuthenticated
