@@ -1,5 +1,17 @@
 import { createMuiTheme } from '@material-ui/core'
 
+const bp: any = {
+  keys: ['xs', 'sm', 'md', 'lg', 'xl', 'profile'],
+  values: {
+    xs: 0,
+    sm: 600,
+    md: 960,
+    lg: 1280,
+    xl: 1920,
+    profile: 820,
+  },
+}
+
 const defaultTheme = () =>
   createMuiTheme({
     palette: {
@@ -23,6 +35,7 @@ const defaultTheme = () =>
         secondary: '#808080',
       },
     },
+    breakpoints: bp,
   })
 
 //const darkColors = ['c6c3b5', '#343434', '262b30', '2f363c']

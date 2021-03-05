@@ -1,6 +1,9 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 
-import { AuthContext } from '../../../context/auth-context'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useOnClickOutside } from '../../../../utils/use-on-click-outside'
+import { logOut } from '../../../../actions'
 
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { createStyles, makeStyles } from '@material-ui/core/styles'
@@ -9,7 +12,7 @@ import Button from '@material-ui/core/Button'
 
 import SettingsIcon from '@material-ui/icons/Settings'
 import PermIdentityIcon from '@material-ui/icons/PermIdentity'
-import default_avatar from '../../../assets/img/profile-user.svg'
+import default_avatar from '../../../../assets/img/profile-user.svg'
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -42,7 +45,8 @@ const useStyles = makeStyles((theme) =>
 )
 
 const Menu = () => {
-  const { logout } = useContext(AuthContext)
+  const dispatch = useDispatch()
+  const history = useHistory()
   const classes = useStyles()
   const ref: any = useRef()
   const matchesWidth = useMediaQuery((theme: any) =>
@@ -52,7 +56,9 @@ const Menu = () => {
   useOnClickOutside(ref, () => setModalOpen(false))
 
   const handleLogout = () => {
-    logout()
+    localStorage.removeItem('userData')
+    history.push('/')
+    dispatch(logOut())
   }
 
   return (
@@ -132,7 +138,7 @@ const Menu = () => {
 }
 
 export default Menu
-
+/*
 // Hook
 function useOnClickOutside(ref: any, handler: any) {
   useEffect(() => {
@@ -152,3 +158,4 @@ function useOnClickOutside(ref: any, handler: any) {
     }
   }, [ref, handler])
 }
+*/

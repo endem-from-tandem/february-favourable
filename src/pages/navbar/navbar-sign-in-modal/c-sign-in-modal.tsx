@@ -1,13 +1,19 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
+
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import { signIn } from '../../../actions'
+
 import { ValidatorForm } from 'react-material-ui-form-validator'
-import { VariantType, useSnackbar } from 'notistack'
+import { useSnackbar } from 'notistack'
 
 import SignInModal from './sign-in-modal'
-import { AuthContext } from '../../context/auth-context'
-import { useHttp } from '../../utils/use-http'
+//import { AuthContext } from '../../context/auth-context'
+import { useHttp } from '../../../utils/use-http'
 
 const SignInModalContainer: React.FC = () => {
-  const auth = useContext(AuthContext)
+  const dispatch = useDispatch()
+  const history = useHistory()
   const { enqueueSnackbar } = useSnackbar()
   const [open, setOpen] = useState(false)
   const [type, setType] = useState<'in' | 'up' | null>(null)
@@ -37,32 +43,6 @@ const SignInModalContainer: React.FC = () => {
     setType(type === 'in' ? 'up' : 'in')
   }
 
-  const { error, request, clearError } = useHttp()
-
-  useEffect(() => {
-    if (error) {
-      enqueueSnackbar(error, { variant: 'error' })
-      clearError()
-    }
-  }, [error])
-
-  const handleSubmitted = async (event: React.FormEvent) => {
-    setFormSubmitted(true)
-    try {
-      const response = await request(`/api/auth/sign-${type}`, 'POST', formData)
-      console.log(response)
-      if (response.message === 'Пользователь создан') {
-        enqueueSnackbar(response.message, { variant: 'success' })
-        setType('in')
-      }
-      if (response.token) {
-        setOpen(false)
-        auth.login(response.token, response.userId)
-      }
-    } catch (e) {}
-    setFormSubmitted(false)
-  }
-
   const [showPassword, setShowPassword] = useState<boolean>(false)
   const handleShowPassword = () => {
     setShowPassword(!showPassword)
@@ -80,6 +60,53 @@ const SignInModalContainer: React.FC = () => {
       return true
     })
   }, [formData])
+
+  const { error, request, clearError } = useHttp()
+
+  // AJAX
+
+  const tokenPayloadParse = (token: string) => {
+    let payload = token.split('.')[1]
+    payload = JSON.parse(atob(payload))
+    return payload
+  }
+
+  const handleSubmitted = async () => {
+    setFormSubmitted(true)
+    await handleRequest()
+    setFormSubmitted(false)
+  }
+
+  const handleRequest = async () => {
+    try {
+      const response = await request(`/api/auth/sign-${type}`, 'POST', formData)
+
+      if (response.message === 'Пользователь создан') {
+        enqueueSnackbar(response.message, { variant: 'success' })
+        setType('in')
+      }
+      if (response.token) {
+        handleSignIn(response.token)
+        setOpen(false)
+      }
+    } catch (e) {}
+  }
+
+  const handleSignIn = (jwtToken: string) => {
+    localStorage.setItem('userData', JSON.stringify({ token: jwtToken }))
+    const payload: any = tokenPayloadParse(jwtToken)
+    const id = payload.userId
+    history.push(`id${id}`)
+    dispatch(signIn(payload))
+  }
+
+  useEffect(() => {
+    if (error) {
+      enqueueSnackbar(error, { variant: 'error' })
+      clearError()
+    }
+  }, [error])
+
   return (
     <SignInModal
       type={type}

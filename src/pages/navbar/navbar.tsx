@@ -1,29 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import SignInModal from '../navbar-sign-in-modal/'
-import NavbarAuthenticated from '../navbar-authenticated'
+import SignInModal from './navbar-sign-in-modal/'
+import NavbarAuthenticated from './navbar-authenticated'
 
 import { makeStyles, createStyles } from '@material-ui/core/styles'
 
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import Box from '@material-ui/core/Box'
 import Container from '@material-ui/core/Container'
-import Typography from '@material-ui/core/Typography'
-
-//import List from '@material-ui/core/List'
-//import ListItem from '@material-ui/core/ListItem'
-//import ListItemText from '@material-ui/core/ListItemText'
 
 //Toolbar & Drawer
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-
-//import Avatar from '@material-ui/core/Avatar'
-//import Drawer from '@material-ui/core/Drawer'
-
-import { Card, CardActions, CardContent } from '@material-ui/core'
 
 //Icons
 import Logo from '../../assets/img/logo.png'

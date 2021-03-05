@@ -41,6 +41,16 @@ const Home = () => {
           <Box mb={1}>
             <Divider className={classes.divider} />
             <Typography variant='overline'>
+              Authorization / Authentication
+              <br />
+            </Typography>
+            <Typography color='secondary' variant='caption'>
+              02.25.2021
+            </Typography>
+          </Box>
+          <Box mb={1}>
+            <Divider className={classes.divider} />
+            <Typography variant='overline'>
               Work on design
               <br />
             </Typography>
